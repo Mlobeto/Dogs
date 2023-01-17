@@ -32,7 +32,11 @@ module.exports = (sequelize) => {
     },
     image: {
       type: DataTypes.STRING(100000)
-    }
+    },
+    created: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+    },
 
     }, { timestamps: false }); //para que no agregue campos de fecha por defecto
 

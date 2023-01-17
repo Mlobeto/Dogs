@@ -1,5 +1,6 @@
 const { Dog, Temperament } = require("../db");
 const axios = require("axios");
+//const dogsRouter = require("../routes/dogsRouter");
 const { MY_API_KEY } = process.env;
 
 const cleanArray = (arr) =>
@@ -10,32 +11,63 @@ const cleanArray = (arr) =>
       height: elem.height,
       weight: elem.weight,
       life_span: elem.life_span,
-      create: false,
+      temperament: elem.temperament,
+      created: false,
     };
   });
 
-const createDog = async (id, name, height, weight, life_span, image ) =>
-  await Dog.create({ id, name, height, weight, life_span, image });
+const createDog = async ( name, height, weight, life_span, image, temperament) =>
+  await Dog.create({  name, height, weight, life_span, image, temperament });
 
 const getDogById = async (id, source) => {
   const dog =
     source === "api"
       ? (
           await axios.get(
-            `https://api.thedogapi.com/v1/breeds?/${id}/api_key=${MY_API_KEY}`
+            `https://api.thedogapi.com/v1/breeds?/api_key=${MY_API_KEY}/${id}`
           )
         ).data
-      : await Dog.findByPk(id);
+      : await Dog.findByPk(id, {
+        include:{
+          model: Temperament,
+          attributes:["temperament"]
+        }
+      });
 
-  return dog[id-1];
-};
-const getAllDogs = ()=> { // buscar en api y base de datos y unificar
-
-
-}
-searchDogByName= ()=> {
-    
+  return dog [id];
 };
 
+const getAllDogs = async () => {
+  // buscar en api y base de datos y unificar
+  const databaseDogs = await Dog.findAll();
 
-module.exports = { createDog, getDogById, getAllDogs, searchDogByName   };
+  const apiDogsRaw = (
+    await axios.get(
+      `https://api.thedogapi.com/v1/breeds?/api_key=${MY_API_KEY}`
+    )
+  ).data
+  
+
+  const apiDogs = cleanArray(apiDogsRaw);
+  return [...databaseDogs, ...apiDogs];
+};
+const searchDogByName = async (name) => {
+  const databaseDogs = await Dog.findAll({
+    //mejorar busqueda inexacta
+    where: { name: name },
+  });
+
+  const apiDogsRaw = (
+    await axios.get(
+      `https://api.thedogapi.com/v1/breeds?/api_key=${MY_API_KEY}`
+    )
+  ).data;
+
+  const apiDogs = cleanArray(apiDogsRaw);
+
+  const filteredApi = apiDogs.filter((dog) => dog.name.includes(`${name}`));
+
+  return [...filteredApi, ...databaseDogs];
+};
+
+module.exports = { createDog, getDogById, getAllDogs, searchDogByName };
