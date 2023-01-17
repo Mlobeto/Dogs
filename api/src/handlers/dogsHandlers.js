@@ -26,15 +26,17 @@ const getDogHandler = async (req, res) => {
 };
 
 const createDogHandler = async (req, res) => {
-  const { id, name, height, weight, life_span } = req.body;
+  const {  name, height, weight, life_span, image, temperament } = req.body;
   try {
-    const newDog = await createDog(id, name, height, weight, life_span);
+    const newDog = await createDog( name, height, weight, life_span, image, temperament);
     res.status(201).json(newDog);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
 
-                                                                                                           
+
+
+
 
 module.exports = { getDogHandler, getDogsHandler, createDogHandler };

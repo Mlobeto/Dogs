@@ -23,7 +23,7 @@ module.exports = (sequelize) => {
 
     weight: {
       type: DataTypes.STRING,
-      allowNull: false,
+      
     },
 
     life_span: {
@@ -31,7 +31,13 @@ module.exports = (sequelize) => {
 
     },
     image: {
-      type: DataTypes.STRING(100000)
+      type: DataTypes.STRING(100000),
+
+    },
+
+    temperament:{
+      type: DataTypes.STRING
+
     },
     created: {
       type: DataTypes.BOOLEAN,

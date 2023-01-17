@@ -11,30 +11,64 @@ const cleanArray = (arr) =>
       height: elem.height,
       weight: elem.weight,
       life_span: elem.life_span,
+      image: elem.image.url,
       temperament: elem.temperament,
       created: false,
     };
   });
 
-const createDog = async ( name, height, weight, life_span, image, temperament) =>
-  await Dog.create({  name, height, weight, life_span, image, temperament });
+const createDog = async (
+  name,
+  height,
+  weight,
+  life_span,
+  image,
+  temperament,
+  created
+) =>
+  await Dog.create({
+    name,
+    height,
+    weight,
+    life_span,
+    image,
+    temperament,
+    created,
+  });
+
+const cleanArrayId = async (id) => {
+  const apiDogsAll = (
+    await axios.get(
+      `https://api.thedogapi.com/v1/breeds/${id}?api_key=${MY_API_KEY}`
+    )
+  ).data;
+  if (apiDogsAll) {
+    let dogApi = apiDogsAll;
+    return {
+      id: dogApi.id,
+      name: dogApi.name,
+      height: dogApi.height.metric,
+      weight: dogApi.weight.metric,
+      life_span: dogApi.life_span,
+      temperament: dogApi.temperament,
+      image: `https://c2m2.thedogapi.com/images/${dogApi.reference_image_id}.jpg`,
+      create: false,
+    };
+  }
+};
 
 const getDogById = async (id, source) => {
   const dog =
     source === "api"
-      ? (
-          await axios.get(
-            `https://api.thedogapi.com/v1/breeds?/api_key=${MY_API_KEY}/${id}`
-          )
-        ).data
+      ? cleanArrayId(id)
       : await Dog.findByPk(id, {
-        include:{
-          model: Temperament,
-          attributes:["temperament"]
-        }
-      });
+          include: {
+            model: Temperament,
+            attributes: ["temperament"],
+          },
+        });
 
-  return dog [id];
+  return dog;
 };
 
 const getAllDogs = async () => {
@@ -45,8 +79,7 @@ const getAllDogs = async () => {
     await axios.get(
       `https://api.thedogapi.com/v1/breeds?/api_key=${MY_API_KEY}`
     )
-  ).data
-  
+  ).data;
 
   const apiDogs = cleanArray(apiDogsRaw);
   return [...databaseDogs, ...apiDogs];
@@ -54,7 +87,7 @@ const getAllDogs = async () => {
 const searchDogByName = async (name) => {
   const databaseDogs = await Dog.findAll({
     //mejorar busqueda inexacta
-    where: { name: name },
+    where: { name },
   });
 
   const apiDogsRaw = (
