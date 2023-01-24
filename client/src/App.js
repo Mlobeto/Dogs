@@ -1,19 +1,22 @@
-import './App.css';
-import {Detail, Form, Home, Landing} from "./views"
-import {Route} from "react-router-dom"
-
-
-
-
+import { BrowserRouter, Route } from 'react-router-dom';
+import LandingPage from './Components/LandingPage/LandingPage';
+import Home from './Components/Home/Home';
+import DogDetail from './Components/DogDetail/DogDetail';
+import DogCreation from './Components/DogCreation/DogCreation';
+//import About from './components/About/About';
+import styles from './App.module.css'
 
 function App() {
   return (
-    <div className="App">
-      <Route exact path ="/" component= {() => <Landing /> }/> 
-      <Route exact path ="/create" component= {() => <Form /> }/>
-      <Route exact path ="/detail" component= {() => <Detail /> }/>
-      <Route exact path ="/home" render = {() => <Home /> }/> 
-    </div>
+    <BrowserRouter>
+      <div className={styles.Mio}>
+        <Route exact path='/' component={LandingPage} />
+        <Route path='/home' component={Home} />
+        <Route path='/dogs/:id' component={DogDetail}/>
+        <Route path='/newDog/' component={DogCreation}/>
+        
+      </div>
+    </BrowserRouter>
   );
 }
 

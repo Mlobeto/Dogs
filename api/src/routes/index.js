@@ -1,18 +1,17 @@
 const { Router } = require('express');
+require('dotenv').config();
+
 // Importar todos los routers;
-const dogsRouter = require("./dogsRouter.js")
-//const dogsRouter = require ("./dogsRouter.js")
-const temperamentRouter = require ("./temperamentRouter.js")
-// Ejemplo: const authRouter = require('./auth.js');
-const routerTemp = require ("../routes/temperamentRouter")
+const dogs = require('../routes/routesDog');
+const temperaments = require('../routes/routesTemperament');
+const breeds = require('../routes/routesBreeds');
 
 const router = Router();
 
-router.use("/dogs", dogsRouter)
-//router.use("/post", dogsRouter)
-router.use("/temperament", temperamentRouter)
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
-//router.use("/dogs", routerTemp)
+router.use('/', dogs);
+router.use('/', temperaments);
+router.use('/', breeds);
 
 module.exports = router;

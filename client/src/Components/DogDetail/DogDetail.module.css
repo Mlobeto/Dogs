@@ -1,0 +1,117 @@
+.bodix {
+    width: 65%;
+    height: 100%;
+    font-size: 15px;
+  }
+  
+  .mainContainer {
+    margin-top: 2%;
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(243, 230, 41);
+    box-shadow: 6px 7px 8px -6px rgba(192, 211, 20, 0.7);
+    border-radius: 15px;
+    color: rgb(12, 12, 12);
+  }
+  
+  .mainTitle {
+    text-align: center;
+    margin: 10px;
+    font-size: 10px;
+  }
+  
+  .image {
+    border-radius: 15px;
+    height: 230px;
+    border: 3px white solid;
+    box-shadow: 6px 7px 8px -6px rgba(239, 243, 15, 0.7);
+  }
+  
+  .detailsContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: rgba(255, 241, 90);
+    padding: 8px;
+    border-radius: 7px;
+    max-width: 80%;
+    min-height: 25%;
+    margin: 10px;
+  }
+  
+  .breed_group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    width: 50%;
+  }
+  
+  .temperament {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: left;
+    width: 100%;
+    gap: 10px;
+  }
+  
+  .life_span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    width: 50%;
+  }
+  
+  .weights {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    width: 50%;
+  }
+  
+  .heights {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    width: 50%;
+  }
+  
+  .detailsSVG {
+    width: 60px;
+    background-color: rgb(233, 199, 9);
+    padding: 5px;
+    border-radius: 5px;
+  }
+  
+  .button {
+    background-color: rgb(216, 231, 6);
+    color: rgb(19, 17, 17);
+    cursor: pointer;
+    line-height: 2.1;
+    width: 75px;
+    font-size: 18px;
+  }
+  
+  .imageSection {
+    padding: 5px;
+    margin: 15px;
+  }
+  
+  .infoSection {
+    padding: 2px;
+    margin: 11px;
+  }
+  
+  .xBone {
+    height: 25px;
+  }

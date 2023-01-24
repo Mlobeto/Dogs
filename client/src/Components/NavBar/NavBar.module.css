@@ -1,0 +1,54 @@
+.logo {
+    width: 30px;
+    height: 30px;
+    background-color: rgb(46, 44, 44);
+    padding: -3px;
+    border-radius: 5px;
+  }
+  
+  .nav {
+    color: rgb(196, 191, 191);
+    background-color: rgb(255, 241, 90);
+    display: display-listitem;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    width: 100%;
+    z-index: 1;
+    position: fixed;
+  }
+  
+  .logoAndTitle {
+    display: inline-box;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+  }
+  .TitleAndSearchBar {
+    color: rgb(73, 73, 67);
+      margin-left: 10%;
+    width: 75%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .button_add_dog{
+    width: 100%;
+    max-width: 370px;
+    font-size: 0.9rem; 
+    background: none;
+    padding: 0.6rem 0.6rem;
+    transition: color 0.5s linear;
+    z-index: 100;
+    border: 0.1rem solid #d7ec1b;
+    outline: 0.1rem solid #a6aaa9;
+    text-shadow: 0 0 3px #101111;
+    background: #e5f50c;
+
+    box-shadow: 5px 3px 5px 0.5px rgba(0,0,0,0.6);
+}
+
+ 

@@ -1,0 +1,13 @@
+.dogsArea{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 60%;
+    margin-left: 10%;
+    margin-top: 120px;
+}
+
+.pagination{
+    min-width: 80%;
+}

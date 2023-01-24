@@ -4,46 +4,44 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('dog', {
-      id: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
-        allowNull: false,
-        primaryKey: true
-      },
-  
-    name: {
+    id:{
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
+      primaryKey: true
+    },
+    name:{
       type: DataTypes.STRING,
       allowNull: false,
     },
-
-    height: {
+    height_min:{
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    weight_min:{
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    height_max:{
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    weight_max:{
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    life_span:{
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true
     },
-
-    weight: {
+    image:{
       type: DataTypes.STRING,
-      
+      allowNull: true
     },
-
-    life_span: {
-      type: DataTypes.STRING
-
-    },
-    image: {
-      type: DataTypes.STRING(100000),
-
-    },
-
-    temperament:{
-      type: DataTypes.STRING
-
-    },
-    created: {
+    createdInDB: {
       type: DataTypes.BOOLEAN,
-      defaultValue: true,
-    },
-
-    }, { timestamps: false }); //para que no agregue campos de fecha por defecto
-
+      allowNull: false,
+      defaultValue: true
+    }
+  });
 };

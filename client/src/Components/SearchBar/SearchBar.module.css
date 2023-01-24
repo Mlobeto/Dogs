@@ -1,0 +1,21 @@
+.searchBarObject {
+    margin: 15px;
+    font-size: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .input{
+    color: (255, 241, 90);
+    border-radius: 1px;
+    margin: 5px;
+    padding: 2px;
+    line-height: 2.05;
+  }
+  
+  button{
+    margin: 5px;
+    padding: 1px;
+    border-radius: 1px;
+  }

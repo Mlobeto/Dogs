@@ -1,0 +1,74 @@
+.side {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(231, 231, 231);
+    color: rgb(13, 13, 14);
+    top: 2%;
+    left: -2.2%;
+    margin: 100px 5px;
+    margin-left: 3%;
+    padding: 10px;
+    border-radius: 1px;
+    min-width: 180px;
+    height: fit-content;
+    position: fixed;
+  }
+  
+  .sideBarHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 5px 0;
+  }
+  
+  .header {
+    margin: 0 8px;
+  }
+  .refresh:hover {
+    color: white;
+    background-color: #070707;
+    cursor: pointer;
+  }
+  .tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .tooltip .tooltiptext {
+    font-size: 8px;
+    top: -05px;
+    left: 120%;
+    visibility: hidden;
+    width: 110px;
+    background-color: rgb(253, 250, 250);
+    color: rgb(26, 25, 25);
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    z-index: 1;
+  }
+  
+  .filterSection {
+    margin: 8px 4px;
+  }
+  
+  .filterHeader {
+    margin-bottom: 2%;
+  }
+  
+  select {
+    width: 100%;
+  }
+  
+  
