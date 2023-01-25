@@ -247,14 +247,14 @@ export default function DogCreation() {
                 {input.temperament.map((el) => (
                   <div key={el} className={styles.selectedItems}>
                     <p>{el}</p>
-                    <button onClick={() => handleDelete(el)}>x</button>
+                    <button onClick={() => handleDelete(el)}>X</button>
                   </div>
                 ))}
               </div>
             </div>
             <div className={styles.buttonSection}>
               <Link to="/home">
-                <button className={styles.buttonCancel}>Cancel</button>
+                <button className={styles.buttonCancel}>Cancel And Back</button>
               </Link>
               <button className={styles.button} type="submit">
                 Creat 

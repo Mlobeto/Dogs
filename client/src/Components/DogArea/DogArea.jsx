@@ -1,4 +1,5 @@
 
+
 import DogCard from "../DogCard/DogCard";
 import Pagination from "../Pagination/Pagination";
 import { useEffect, useState } from "react";
@@ -43,6 +44,8 @@ export default function DogArea() {
             image={el.image}
             temperament={el.temperament}
             temperaments={el.temperaments}
+            weight_min={el.weight_min}
+            weight_max={el.weight_max}
           />
         )})}
       </div>
