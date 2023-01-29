@@ -1,5 +1,3 @@
-
-
 import DogCard from "../DogCard/DogCard";
 import Pagination from "../Pagination/Pagination";
 import { useEffect, useState } from "react";
@@ -52,3 +50,4 @@ export default function DogArea() {
    
   );
 }
+

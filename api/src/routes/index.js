@@ -3,7 +3,7 @@ require('dotenv').config();
 
 // Importar todos los routers;
 const dogs = require('../routes/routesDog');
-const temperaments = require('../routes/routesTemperament');
+const temperaments = require('./routesTemperaments');
 const breeds = require('../routes/routesBreeds');
 
 const router = Router();

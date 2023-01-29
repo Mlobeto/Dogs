@@ -3,7 +3,7 @@ const dogs = express.Router();
 const { Temperament, Dog } = require('../db');
 
 const { getAllDogs /*, getApiInfoDog, getDBInfoDog */ } = require('../controllers/dogControllers');
-const { axios } = require('axios');
+const { default: axios } = require('axios');
 
 dogs.use(express.json());
 
@@ -18,7 +18,7 @@ dogs.get('/dogs', async (req, res) => {
                 );
                 dogName.length ?
                     res.status(200).send(dogName) :
-                    res.status(404).send("you have to type the name of a dog")
+                    res.status(404).send("Cann't find the dog with the name you are looking for")
             } else { /* Si no hay query en la URL */
                 res.status(200).json(dogsTotal)
             }
@@ -29,7 +29,7 @@ dogs.get('/dogs', async (req, res) => {
     });
 
 dogs.post('/dogs', async (req, res) => {
-    var { // las mismas propiedades para crear el nuevo perro
+    var { // takes these properties to build the new dog
         name,
         height_min,
         height_max,
@@ -49,7 +49,7 @@ dogs.post('/dogs', async (req, res) => {
     }
 
     if (name && height_min && height_max && weight_min && weight_max && temperament && image) {
-        // los datos para crear el perro
+        // takes that data for the new dog  
         const createDog = await Dog.create({
             name: name,
             height_min: parseInt(height_min),
@@ -59,92 +59,72 @@ dogs.post('/dogs', async (req, res) => {
             life_span: life_span,
             image: image || 'https://dog.ceo/api/breeds/image/random',
         });
-        temperament.map(async el => {
+        
             const findTemp = await Temperament.findAll({
-                where: { name: el }
+                where: { name: temperament }
             });
             createDog.addTemperament(findTemp);
-        })
+        
         res.status(200).send(createDog);
     } else {
-        res.status(404).send('Fill in all the boxes');
+        res.status(404).send('Data needed to proceed is missing');
     }
 })
 
-dogs.get('/dogs/:idRaza', async (req, res) => {
-     /* http://localhost:3001/dogs/7 */
-    try {
-        const { idRaza } = req.params;
-        const allDogs = await getAllDogs();
-        if (!idRaza) {
-            res.status(404).json("this dog id does not exist")
-        } else {
-            const dog = allDogs.find(dogui => dogui.id.toString() === idRaza);
-            res.status(200).json(dog)
-        }
-    } catch (error) {
-        res.status(404).send(error)
-    }
-})
-
-
-
-
-dogs.delete("/:idRaza", async (req, res, next) => {//getAllDogs, getApiInfoDog, getDBInfoDog
+dogs.get("/dogs/:idRaza", async (req, res) => {
+  /* http://localhost:3001/dogs/7 */
+  try {
     const { idRaza } = req.params;
-    try {
-      Dog.destroy({ where: { id: id } });
-      let dataApi = await utils.getApiInfoDog();
-      let dataDb = await Dog.findAll({
-        include: Temperament,
-      });
-      // FORMATEO PARA Q DESDE API Y DESDE DB LLEGUEN AL FRONT IGUALES
-      dataDb = dataDb.map((el) => {
-        return {
-          id: el.id,
-          name: el.name,
-          height_min: el.height_min,
-          height_max: el.height_max,
-          weight_min: el.weight_min,
-          weight_max: el.weight_max,
-          life_span: el.life_span,
-          image: el.image,
-          createdInDB: true,
-          temperaments: el.Temperaments.map((i) => {
-            return i.name;
-          }).join(", "),
-        };
-      });
-      // resp de API y de DB juntas
-      let allData = dataDb.concat(dataApi);
-      console.log("Delete successfully!".bgRed);
-      res.send(allData);
-    } catch (err) {
-      next(err);
+    const allDogs = await getAllDogs();
+    if (!idRaza) {
+      res.status(404).json("Couldn't find the name on DBase");
+    } else {
+      const dog = allDogs.find((perro) => perro.id.toString() === idRaza);
+      res.status(200).json(dog);
     }
-  });
+  } catch (error) {
+    res.status(404).send(error);
+  }
+});
+
+dogs.delete("/dogs/:id/delete", async (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  const totalDogs = await getAllDogs();
+  if (id) {
+    let dogId = await totalDogs.filter(
+      (el) => el.createdInDB === true && el.id == id
+    );
+    console.log(`este es el dogId${id}`);
+    dogId.length
+      ? res.status(200).json(
+          await Dog.destroy({
+            where: { id: id },
+            truncate: { cascade: true },
+          })
+        )
+      : res.status(404).send("is not Deleted");
+  }
+});
 
 module.exports = dogs;
 
-// const { Router } = require("express");
-// require("dotenv").config();
-// const {
-//   createDogHandler,
-//   getDogHandler,
-//   getDogsHandler,
-  
-
-
-  // } = require("../handlers/dogsHandlers");
-
-// const dogsRouter = Router();
-
-// dogsRouter.get("/", getDogsHandler);
-
-// dogsRouter.get("/:id", getDogHandler);
-
-// dogsRouter.post("/", createDogHandler);
-
-
-
-//module.exports = dogs;
+// dogs.delete("/dogs/:id/delete", async (req, res) => {
+//     const id = req.params.id;
+//     console.log(id);
+//     const totalDogs = await getAllDogs();
+//     if (id) {
+//       let dogid = await totalDogs.filter(
+//         (el) => el.createdInDB === true && el.id == id
+//       );
+//       //console.log(`este es el dogId${id}`);
+//       dogid.length
+//         ? res.status(200).json(
+//             await Dog.destroy({
+//               where: { id: id },
+//               truncate: { cascade: true },
+//             })
+//           )
+//         : res.status(404).send("is not Deleted");
+//     }
+//       })

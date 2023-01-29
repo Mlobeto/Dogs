@@ -28,7 +28,7 @@ export default function SearchBar() {
         onChange={(e) => setDogsState(e.target.value)}
       />
       <button type="submit" onClick={handleClick}>
-        <span className="material-icons">search</span>
+        <span >search</span>
       </button>
     </div>
   );

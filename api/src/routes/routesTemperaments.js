@@ -12,9 +12,10 @@ temperaments.use(express.json());
 temperaments.get('/temperament',/* http://localhost:3001/temperament */ async (req, res) => {
     const allData = await axios.get(URL);
     try {
-        let everyTemperament = allData.data.map(dog => dog.temperament ? dog.temperament : "No info").map(dog => dog?.split(', '));
-        /* Set para hacer UNIQUE :: Stackoverflow */
-        let eachTemperament = [...new Set(everyTemperament.flat())];
+        let everyTemperament = allData.data.map(dog => dog.temperament ? dog.temperament : "No info").map
+        (dog => dog?.split(', '));
+       
+        let eachTemperament = [...new Set(everyTemperament.flat())]; //para arays anidados
         eachTemperament.forEach(el => {
             if (el) { // temperament : ,
                 Temperament.findOrCreate({

@@ -24,7 +24,7 @@ const getApiInfoDog = async () => {
 };
 
 const getDBInfoDog = async () => {
-    var dogsDB = await Dog.findAll({
+    const dogsDB = await Dog.findAll({
         include: {
             model: Temperament,
             attributes: ['name'],
@@ -43,15 +43,15 @@ const getAllDogs = async () => {
     return infoTotal;
 };
 
+
 module.exports = {
     getAllDogs, getApiInfoDog, getDBInfoDog
 };
 
-
 // const { Dog, Temperament } = require("../db");
 // const axios = require("axios");
 // const dogsRouter = require("../routes/dogsRouter");
-// const { MY_API_KEY } = process.env;
+// const { API_KEY } = process.env;
 // const URL = `https://api.thedogapi.com/v1/breeds?${MY_API_KEY}`
 
 // const cleanArray = (arr) =>
@@ -155,3 +155,6 @@ module.exports = {
 // };
 
 // module.exports = { createDog, getDogById, getAllDogs, searchDogByName };
+//module.exports = {
+//     getAllDogs, getApiInfoDog, getDBInfoDog
+// };

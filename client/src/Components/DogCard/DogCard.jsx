@@ -54,10 +54,20 @@ export default function DogCard({
             <h4 className={styles.dogName}>{name}</h4>
           </div>
           <div className={styles.infoArea}>
+            
             <div className={styles.tempArea}>
               {temperaments ? (
                 <h5 className={styles.dogTemp}>
                   {temperaments.map((temp) => `${temp.name} `).join(", ")}
+                </h5>
+              ) : (
+                <br />
+              )}
+            </div> 
+            <div className={styles.weightArea}>
+              {weight_max ? (
+                <h5 className={styles.weightArea}>
+                  Weight Min/Max =    {weight_min}  -{weight_max}
                 </h5>
               ) : (
                 <br />

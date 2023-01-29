@@ -26,7 +26,7 @@ function validateForm(input) {
   if (!input.weight_max) {
     // weight max
     errors.weight_max = "Type a valid weight ";
-  } else if (!/\d{1,2}/gi.test(input.weight_max)) {
+  } else if (!/\d{1,2}/.test(input.weight_max)) {
     errors.weight_max = "you must input numbers. Example: '15'";
   } else {
     errors.weight_max = "";
@@ -35,7 +35,7 @@ function validateForm(input) {
   if (!input.height_min) {
     // height min
     errors.height_min = "Type a valid  height ";
-  } else if (!/\d{1,2}/gi.test(input.height_min)) {
+  } else if (!/\d{1,2}/.test(input.height_min)) {
     errors.height_min = "you must input numbers. Example: '10'";
   } else {
     errors.height_min = "";
@@ -43,7 +43,7 @@ function validateForm(input) {
   if (!input.height_max) {
     // height max
     errors.height_max = "Type a valid height ";
-  } else if (!/\d{1,2}/gi.test(input.height_max)) {
+  } else if (!/\d{1,2}/.test(input.height_max)) {
     errors.height_max = "You must input numbers. Example: '10'";
   } else {
     errors.height_max = "";
