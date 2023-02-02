@@ -2,7 +2,7 @@ const express = require('express');
 const dogs = express.Router();
 const { Temperament, Dog } = require('../db');
 
-const { getAllDogs /*, getApiInfoDog, getDBInfoDog */ } = require('../controllers/dogControllers');
+const { getAllDogs } = require('../controllers/dogControllers');
 const { default: axios } = require('axios');
 
 dogs.use(express.json());
@@ -47,11 +47,16 @@ dogs.post('/dogs', async (req, res) => {
             console.log(error)
         }
     }
+    let todos = await getAllDogs();
+    let chocan = todos.find(perro => perro.name === name)
+    if(chocan) {
+      res.status(400).send('Crash Name')
+    }
 
     if (name && height_min && height_max && weight_min && weight_max && temperament && image) {
         // takes that data for the new dog  
         const createDog = await Dog.create({
-            name: name,
+            name: name.slice(0,1).toUpperCase()+name.slice(1, name.length).toLowerCase(),
             height_min: parseInt(height_min),
             height_max: parseInt(height_max),
             weight_min: parseInt(weight_min),
@@ -109,22 +114,4 @@ dogs.delete("/dogs/:id/delete", async (req, res) => {
 
 module.exports = dogs;
 
-// dogs.delete("/dogs/:id/delete", async (req, res) => {
-//     const id = req.params.id;
-//     console.log(id);
-//     const totalDogs = await getAllDogs();
-//     if (id) {
-//       let dogid = await totalDogs.filter(
-//         (el) => el.createdInDB === true && el.id == id
-//       );
-//       //console.log(`este es el dogId${id}`);
-//       dogid.length
-//         ? res.status(200).json(
-//             await Dog.destroy({
-//               where: { id: id },
-//               truncate: { cascade: true },
-//             })
-//           )
-//         : res.status(404).send("is not Deleted");
-//     }
-//       })
+

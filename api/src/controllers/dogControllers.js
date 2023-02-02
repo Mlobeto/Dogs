@@ -9,7 +9,7 @@ const getApiInfoDog = async () => {
     const apiInfo = await apiURL.data.map(e => {
         return { // requiere datos de la API 
             id: e.id,
-            name: e.name,
+            name: e.name, //si lo saco no lo ordena
             image: e.image.url,
             breed_group: e.breed_group,
             temperament: e.temperament,
@@ -42,6 +42,8 @@ const getAllDogs = async () => {
     const infoTotal = apiInfo.concat(DBInfo);
     return infoTotal;
 };
+
+
 
 
 module.exports = {

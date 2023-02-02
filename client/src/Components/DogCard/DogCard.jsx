@@ -11,7 +11,9 @@ export default function DogCard({
   weight_max,
 }) {
   if (!temperaments) {
+
     return (
+      <div className={styles.dogsArea}>
       <div className={styles.dogCard}>
         <Link to={"/dogs/" + id}>
           <div className={styles.titleArea}>
@@ -45,9 +47,11 @@ export default function DogCard({
           </div>
         </Link>
       </div>
+      </div>
     );
   } else {
     return (
+      <div className={styles.dogsArea}>
       <div className={styles.dogCard}>
         <Link to={"/dogs/" + id}>
           <div className={styles.titleArea}>
@@ -84,6 +88,7 @@ export default function DogCard({
           </div>
         </Link>
       </div>
+     </div>
     );
   }
 }

@@ -1,44 +1,40 @@
-
-import Logo from "../../assets/favicon-32x32.png";
+import Logo from "../../assets/logo.jpg";
+//import L11 from "../../assets/L11.jpeg";
 import styles from "./NavBar.module.css";
 import { Link } from "react-router-dom";
 import SearchBar from "../SearchBar/SearchBar";
 
-export default function NavBar() {
+export default function NavBar({pagination}) {
+
   return (
- 
-      <div className={styles.nav}>
+    <div className={styles.nav}>
       <div className={styles.TitleAndSearchBar}>
         <div className={styles.logoAndTitle}>
           <Link to="/home">
             <img
-              id="logoHenry"
-              src={Logo}
-              alt="a happy dog icon"
               className={styles.logo}
+              src={Logo}
+              alt="a dog icon"
+              onClick={() => window.location.reload()}
             />
           </Link>
           <div>
             <h1>Dogs</h1>
-            
           </div>
         </div>
         <div>
-          <SearchBar />
+          <SearchBar
+          pagination={pagination} />
         </div>
         <div className={styles.filterSection}>
-        
           <div className={styles.addDog}>
             <Link to="/newDog/">
-            <button className={styles.button_add_dog}>CREATE DOG</button>
+              <button className={styles.button_add_dog}>CREATE DOG</button>
             </Link>
           </div>
         </div>
-
-        
       </div>
-      </div>
-   
+    </div>
   );
 }
 
@@ -52,7 +48,7 @@ export default function NavBar() {
 //             <Link to= "/">HOME</Link>
 //             <Link to= "/create">FORM</Link>
 //         </div>
-        
+
 //     )
 // }
 

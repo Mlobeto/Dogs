@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-import { postDog, getTemperamentsList } from "../../redux/actions";
+import { getDogs, postDog, getTemperamentsList } from "../../redux/actions";
 import styles from "../DogCreation/DogCreation.Module.css";
 
-function validateForm(input) {
+
+
+ function validateForm(input) {
+ 
   let errors = {};
-
+  const regexName = /^[/^[a-zA-Z]+$/;
   // NAME
-  if (!input.name) {
-    errors.name = "Type a name";
-  } else {
-    errors.name = "";
-  }
-
-  // WEIGHTS
+  
+  if (!input.name) errors.name = "El nombre es requerido";
+	else if (input.name.length > 18)
+		errors.name = "El nombre es demasiado largo";
+	else if (!regexName.test(input.name))
+		errors.name = "El nombre debe ser  válido";
+  
+   // WEIGHTS
   if (!input.weight_min) {
     // weight min
     errors.weight_min = "Please enter valid Weight";
@@ -51,15 +55,17 @@ function validateForm(input) {
   return errors;
 }
 
+
 export default function DogCreation() {
   const dispatch = useDispatch();
+
+ useEffect(() => {
+    dispatch(getTemperamentsList());
+  }, [dispatch]); 
+
   const history = useHistory();
-  const temperament = useSelector((state) => state.temperaments).sort(
-    function (a, b) {
-      if (a < b) return -1;
-      else return 1;
-    }
-  );;
+  const temperament = useSelector((state) => state.temperaments);
+  const todos = useSelector(state => state.allDogs);
   const [errors, setErrors] = useState({});
 
   const [input, setInput] = useState({
@@ -110,7 +116,11 @@ export default function DogCreation() {
       !errors.weight_max &&
       !errors.height_max
     ) {
-      alert("Your dog was successfully created!!");
+      let chocan = todos?.map(perro => perro.name === input.name)
+      if (chocan){
+        alert("you cant repeat a dogs name")
+      } else {
+        alert("Your dog was successfully created!!");
       dispatch(postDog(input));
       setInput({
         name: "",
@@ -122,15 +132,16 @@ export default function DogCreation() {
         life_span: "",
         temperament: [],
       });
+      history.push("/home");
+      }
+      
     } else {
       return alert("Something went wrong. Please try again.");
     }
-    history.push("/home");
+    
   }
 
-  useEffect(() => {
-    dispatch(getTemperamentsList());
-  }, [dispatch]);
+  
 
   return (
     
@@ -234,7 +245,7 @@ export default function DogCreation() {
             <div className={styles.Section}>
               <label>Temperaments</label>
               <select onChange={(e) => handleSelect(e)} className={styles.styled_select}>
-                {temperament.map((temp) => {
+                {temperament?.map((temp) => {
                   return (
                     <option key={temp} name={temp}>
                       {temp}
@@ -244,7 +255,7 @@ export default function DogCreation() {
               </select>
               <div className={styles.sidebar_box}>
                 <h4>You have selected that:</h4>
-                {input.temperament.map((el) => (
+                {input.temperament?.map((el) => (
                   <div key={el} className={styles.selectedItems}>
                     <p>{el}</p>
                     <button onClick={() => handleDelete(el)}>X</button>

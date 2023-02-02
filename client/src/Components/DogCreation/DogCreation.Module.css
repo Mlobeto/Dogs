@@ -1,8 +1,11 @@
-
+  .back{
+    background-color: blue;
+  }
   
   .formContainer {
     width: 80%;
-    
+    background: fixed;
+    background-color:black ;
     min-width: 700px;
     display: flex;
     flex-direction: row;
@@ -13,7 +16,7 @@
   }
   form{
       width: 620px;
-      background-color: rgb(246, 246, 13);
+      background-color: rgb(251, 248, 248);
   }
   .button {
     cursor: pointer;
@@ -21,7 +24,7 @@
     width: 75px;
   }
   .button:hover{
-    background-color: rgb(78, 80, 75);
+    background-color: rgb(6, 6, 6);
     transform: scale(1.02,1.02);
   }
   .buttonCancel {
@@ -37,16 +40,17 @@
   }
   
   .Section {
+    background: fixed;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
     align-items: baseline;
-    margin: 2px;
+    margin: 5px;
     padding: 8px;
     border: 1px solid white;
     border-radius: 15px;
-    gap: 5px;
+    gap: 10px;
     box-shadow: 6px 7px 8px -6px rgba(200, 221, 14, 0.7);
     
   }
@@ -83,7 +87,7 @@
     line-height: 1.8;
   }
   input::placeholder {
-    color: rgb(80, 82, 78);
+    color: rgb(241, 241, 13);
     
   }
   .error {
