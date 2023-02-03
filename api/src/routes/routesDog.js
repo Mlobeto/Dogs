@@ -46,13 +46,13 @@ dogs.post('/dogs', async (req, res) => {
         } catch (error) {
             console.log(error)
         }
-    }
+    } if(name){
     let todos = await getAllDogs();
     let chocan = todos.find(perro => perro.name === name)
     if(chocan) {
       res.status(400).send('Crash Name')
     }
-
+    }
     if (name && height_min && height_max && weight_min && weight_max && temperament && image) {
         // takes that data for the new dog  
         const createDog = await Dog.create({

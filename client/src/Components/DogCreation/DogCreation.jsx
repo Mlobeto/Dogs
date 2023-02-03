@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
+// eslint-disable-next-line no-unused-vars
 import { getDogs, postDog, getTemperamentsList } from "../../redux/actions";
 import styles from "../DogCreation/DogCreation.Module.css";
 
@@ -13,7 +14,7 @@ import styles from "../DogCreation/DogCreation.Module.css";
   // NAME
   
   if (!input.name) errors.name = "El nombre es requerido";
-	else if (input.name.length > 18)
+	else if (input.name.length > 25)
 		errors.name = "El nombre es demasiado largo";
 	else if (!regexName.test(input.name))
 		errors.name = "El nombre debe ser  válido";
@@ -22,7 +23,7 @@ import styles from "../DogCreation/DogCreation.Module.css";
   if (!input.weight_min) {
     // weight min
     errors.weight_min = "Please enter valid Weight";
-  } else if (!/\d{1,2}/gi.test(input.weight_min)) {
+  } else if (!/\d{1,2}/.test(input.weight_min)) {
     errors.weight_min = "you must input numbers. Example: '10'";
   } else {
     errors.weight_min = "";
@@ -65,6 +66,7 @@ export default function DogCreation() {
 
   const history = useHistory();
   const temperament = useSelector((state) => state.temperaments);
+  // eslint-disable-next-line no-unused-vars
   const todos = useSelector(state => state.allDogs);
   const [errors, setErrors] = useState({});
 
@@ -116,11 +118,11 @@ export default function DogCreation() {
       !errors.weight_max &&
       !errors.height_max
     ) {
-      let chocan = todos?.map(perro => perro.name === input.name)
-      if (chocan){
-        alert("you cant repeat a dogs name")
-      } else {
-        alert("Your dog was successfully created!!");
+     // let chocan = todos?.map(perro => perro.name === input.name)
+      // if (chocan){
+      //  alert("you cant repeat a dogs name")
+      //} else {
+      alert("Your dog was successfully created!!");
       dispatch(postDog(input));
       setInput({
         name: "",
@@ -135,17 +137,17 @@ export default function DogCreation() {
       history.push("/home");
       }
       
-    } else {
-      return alert("Something went wrong. Please try again.");
+      return alert("This dog already exists");
     }
     
-  }
+  
 
   
 
   return (
     
-      <div className={styles.mainContainerCreation}>
+      <div className={styles.background}>
+        
         <div>
           <h2>Create your Dog</h2>
         </div>
@@ -268,10 +270,11 @@ export default function DogCreation() {
                 <button className={styles.buttonCancel}>Cancel And Back</button>
               </Link>
               <button className={styles.button} type="submit">
-                Creat 
+                Create 
               </button>
             </div>
           </form>
+          <div></div>
         </div>
       </div>
     

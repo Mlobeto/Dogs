@@ -1,14 +1,17 @@
 .dogsArea{
   display: inline-flex;
   flex-direction: row;
-  flex-wrap: wrap;
-  margin:5px;
-  padding: 25px;
+  flex-wrap: no-wrap;
+  justify-items: auto;
+  margin:15px;
+  margin-left: 30px;
+  padding: 10px;
+  margin-bottom: -10;
 }
 
 
 .dogCard {
-    margin: 10px 10px;
+    margin: -20px 10px;
       padding: 6px;
       width: 250px;
       height: 200px;
@@ -25,7 +28,7 @@
     }
   
     .dogName{
-      margin-top: -3px;
+      margin-top: -2px;
       text-align: center
     }
     .titleArea {
@@ -42,14 +45,14 @@
     }
     
     .infoArea {
-      font-size: 10px;
+      font-size: 12px;
       display: flex;
       flex-direction: column-reverse;
       justify-content: center;
     }
     
     .tempArea {
-      margin:5px 1px;
+      margin:2px 1px;
       padding: 1px;
       max-width: 100%;
     }
@@ -64,16 +67,17 @@
       margin: 15px 10px 0 3px;
       max-width: 100%;
       overflow: hidden;
-      border-radius: 4%;
+      border-radius: 10%;
     }
     
     .dogImage {
       top: 50%;
       left: 50%;
-      border-radius: 2%;
+      border-radius: 4%;
+      box-shadow: 2px 3px 5px 3px rgba(57, 57, 57, 0.7);
     }
 
     .weightArea {
       text-align: center;
-      font-size: 8px
+      font-size: 10px
     }

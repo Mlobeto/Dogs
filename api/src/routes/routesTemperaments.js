@@ -13,9 +13,9 @@ temperaments.get('/temperament',/* http://localhost:3001/temperament */ async (r
     const allData = await axios.get(URL);
     try {
         let everyTemperament = allData.data.map(dog => dog.temperament ? dog.temperament : "No info").map
-        (dog => dog?.split(', '));
+        (dog => dog?.split(', ')); //lo mapea y split los separa con ,
        
-        let eachTemperament = [...new Set(everyTemperament.flat())]; //para arays anidados
+        let eachTemperament = [...new Set(everyTemperament.flat())]; //para desarmar array concatenado
         eachTemperament.forEach(el => {
             if (el) { // temperament : ,
                 Temperament.findOrCreate({

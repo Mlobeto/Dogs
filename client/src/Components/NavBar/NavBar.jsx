@@ -1,4 +1,4 @@
-import Logo from "../../assets/logo.jpg";
+import Logo from "../../assets/logo.png";
 //import L11 from "../../assets/L11.jpeg";
 import styles from "./NavBar.module.css";
 import { Link } from "react-router-dom";

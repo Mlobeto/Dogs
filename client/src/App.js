@@ -3,7 +3,7 @@ import LandingPage from './Components/LandingPage/LandingPage';
 import Home from './Components/Home/Home';
 import DogDetail from './Components/DogDetail/DogDetail';
 import DogCreation from './Components/DogCreation/DogCreation';
-import DeleteItem from './Components/DeleteForm/DeleteForm'
+//import DeleteItem from './Components/DeleteForm/DeleteForm'
 //import About from './components/About/About';
 import styles from './App.module.css'
 
@@ -16,8 +16,6 @@ function App() {
         <Route path='/home' component={Home} />
         <Route path='/dogs/:id' component={DogDetail}/>
         <Route path='/newDog/' component={DogCreation}/>
-        
-        
       </div>
     </BrowserRouter>
   );

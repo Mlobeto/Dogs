@@ -131,13 +131,13 @@ export function getDetails(id) {
 export function deleteElementById (id){
     return async function (dispatch){
         try {
-            var json = await axios.get(`http://localhost:3001/dogs/${id}`);
+            let json = await axios.get(`http://localhost:3001/dogs/${id}`);
             return dispatch({
             type: 'DELETE_ELEMENT_BY_ID',
             payload: json.data,  
   });
 }catch (error) {
-   
+    
   }
 };
 }
