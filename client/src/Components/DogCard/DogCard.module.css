@@ -3,16 +3,17 @@
   flex-direction: row;
   flex-wrap: no-wrap;
   justify-items: auto;
+  margin-top: 20px;
   margin:15px;
-  margin-left: 30px;
+  margin-left: 15px;
   padding: 10px;
   margin-bottom: -10;
 }
 
 
 .dogCard {
-    margin: -20px 10px;
-      padding: 6px;
+    margin: 5px 10px;
+      padding: 15px;
       width: 250px;
       height: 200px;
       border-radius: 12px;

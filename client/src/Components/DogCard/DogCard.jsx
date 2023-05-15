@@ -1,6 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./DogCard.module.css";
+import {deleteElementById, getDogs} from "../../redux/actions"
+import {useDispatch} from "react-redux";
+
+
+
+
+
+
+
 export default function DogCard({
   id,
   name,
@@ -9,7 +18,18 @@ export default function DogCard({
   temperaments,
   weight_min,
   weight_max,
-}) {
+}){
+  const dispatch = useDispatch()
+  const handleDelete = async (event)=>{ 
+  
+    await dispatch(deleteElementById(event.target.value))
+   
+     alert("The Dog was deleted successfully")
+     await dispatch(getDogs())
+     
+   }
+
+
   if (!temperaments) {
 
     return (
@@ -55,8 +75,10 @@ export default function DogCard({
       <div className={styles.dogCard}>
         <Link to={"/dogs/" + id}>
           <div className={styles.titleArea}>
-            <h4 className={styles.dogName}>{name}</h4>
+            <h4 className={styles.dogName}>{name}</h4> 
+          <button value={id} onClick={handleDelete}>X</button>
           </div>
+
           <div className={styles.infoArea}>
             
             <div className={styles.tempArea}>

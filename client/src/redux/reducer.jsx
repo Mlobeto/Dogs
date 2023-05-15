@@ -123,11 +123,8 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 details: []
             }
-        case 'DELETE_ELEMENT_BY_ID':
-            return{
-                ...state,
-                allDogs: []
-            }
+       
+
             
         default:
             return state

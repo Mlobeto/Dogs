@@ -34,6 +34,7 @@ export default function NavBar({pagination}) {
           </div>
         </div>
       </div>
+      
     </div>
   );
 }

@@ -9,7 +9,6 @@ export default function Pagination({
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(allDogs / dogsPerPage); i++) {
-    //me devuellve el entero igual o mayor
     pageNumbers.push(i);
   }
   return (
@@ -24,18 +23,31 @@ export default function Pagination({
         </button>
 
         {pageNumbers &&
-          pageNumbers.map((number) => (
-            <li className={styles.number} key={number}>
-              <div
-                className={
-                  currentPage === number ? styles.crumb__active : styles.crumb
-                }
-                onClick={() => pagination(number)}
-              >
-                {number}
-              </div>
-            </li>
-          ))}
+          pageNumbers.map((number) => {
+            if (
+              (number <= 2 ||
+                number >= pageNumbers.length - 1 ||
+                (number >= currentPage - 2 && number <= currentPage + 2)) &&
+              number !== 0
+            ) {
+              return (
+                <li className={styles.number} key={number}>
+                  <div
+                    className={
+                      currentPage === number
+                        ? styles.crumb__active
+                        : styles.crumb
+                    }
+                    onClick={() => pagination(number)}
+                  >
+                    {number}
+                  </div>
+                </li>
+              );
+            } else {
+              return null;
+            }
+          })}
         <button
           className={styles.arrow}
           onClick={() => pagination(currentPage + 1)}
@@ -47,3 +59,29 @@ export default function Pagination({
     </nav>
   );
 }
+
+
+// {pageNumbers &&
+//   pageNumbers.map((number) => {
+//     if (
+//       (number <= 2 ||
+//         number >= pageNumbers.length - 1 ||
+//         (number >= currentPage - 2 && number <= currentPage + 2)) &&
+//       number !== 0
+//     ) {
+//       return (
+//         <li className={styles.number} key={number}>
+//           <div
+//             className={
+//               currentPage === number ? styles.crumb__active : styles.crumb
+//             }
+//             onClick={() => pagination(number)}
+//           >
+//             {number}
+//           </div>
+//         </li>
+//       );
+//     } else {
+//       return null;
+//     }
+//   })}

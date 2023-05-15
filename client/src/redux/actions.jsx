@@ -131,13 +131,14 @@ export function getDetails(id) {
 export function deleteElementById (id){
     return async function (dispatch){
         try {
-            let json = await axios.get(`http://localhost:3001/dogs/${id}`);
-            return dispatch({
-            type: 'DELETE_ELEMENT_BY_ID',
-            payload: json.data,  
-  });
+            let json = await axios.delete(`http://localhost:3001/dogs/${id}/delete`);
+            return json.data
+            //return dispatch({
+            //type: 'DELETE_ELEMENT_BY_ID',
+            //payload: json.data,  
+  //});
 }catch (error) {
-    
+  console.log(error);
   }
 };
 }

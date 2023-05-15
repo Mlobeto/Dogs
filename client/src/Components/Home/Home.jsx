@@ -14,7 +14,7 @@ export default function Home() {
   }, [dispatch])
   const allDogs = useSelector((state) => state.dogs); //refleja el estado de store
   const [currentPage, setCurrentPage] = useState(1); // devuelv el estado actual y la funcion que lo actualiza
-  const [dogsPerPage] = useState(8);
+  const [dogsPerPage] = useState(18);
   const indexOfLastDog = currentPage * dogsPerPage;
   const indexOfFirstDog = indexOfLastDog - dogsPerPage;
   const currentDogs = allDogs.slice(indexOfFirstDog, indexOfLastDog); 

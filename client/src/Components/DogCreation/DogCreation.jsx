@@ -13,11 +13,11 @@ import styles from "../DogCreation/DogCreation.Module.css";
   const regexName = /^[/^[a-zA-Z]+$/;
   // NAME
   
-  if (!input.name) errors.name = "El nombre es requerido";
+  if (!input.name) errors.name = "Input the Name";
 	else if (input.name.length > 25)
-		errors.name = "El nombre es demasiado largo";
+		errors.name = "too many characters";
 	else if (!regexName.test(input.name))
-		errors.name = "El nombre debe ser  válido";
+		errors.name = "The dog's name must be valid";
   
    // WEIGHTS
   if (!input.weight_min) {
@@ -31,9 +31,10 @@ import styles from "../DogCreation/DogCreation.Module.css";
   if (!input.weight_max) {
     // weight max
     errors.weight_max = "Type a valid weight ";
-  } else if (!/\d{1,2}/.test(input.weight_max)) {
+  }  if (!/\d{1,2}/.test(input.weight_max)) {
     errors.weight_max = "you must input numbers. Example: '15'";
-  } else {
+  } 
+  else {
     errors.weight_max = "";
   }
   // HEIGHTS
@@ -60,9 +61,9 @@ import styles from "../DogCreation/DogCreation.Module.css";
 export default function DogCreation() {
   const dispatch = useDispatch();
 
- useEffect(() => {
+ useEffect(() => { //despacha getT cuando el componente se monta y 
     dispatch(getTemperamentsList());
-  }, [dispatch]); 
+  }, [dispatch]); //si el valor cambia se vuelve a ejecutar
 
   const history = useHistory();
   const temperament = useSelector((state) => state.temperaments);
@@ -118,10 +119,10 @@ export default function DogCreation() {
       !errors.weight_max &&
       !errors.height_max
     ) {
-     // let chocan = todos?.map(perro => perro.name === input.name)
-      // if (chocan){
-      //  alert("you cant repeat a dogs name")
-      //} else {
+    //  let chocan = todos?.map(perro => perro.name === input.name)
+    //   if (chocan){
+    //    alert("you cant repeat a dogs name")
+    //   } else {
       alert("Your dog was successfully created!!");
       dispatch(postDog(input));
       setInput({
@@ -147,10 +148,15 @@ export default function DogCreation() {
   return (
     
       <div className={styles.background}>
-        
+        <br />
+        <br />
+        <br />
         <div>
           <h2>Create your Dog</h2>
         </div>
+        <>
+        <br />
+        </>
         <div className={styles.formContainer}>
           <form onSubmit={(e) => handleSubmit(e)}>
             <div className={styles.Section}>
@@ -256,7 +262,8 @@ export default function DogCreation() {
                 })}
               </select>
               <div className={styles.sidebar_box}>
-                <h4>You have selected that:</h4>
+              <br />
+              <br />
                 {input.temperament?.map((el) => (
                   <div key={el} className={styles.selectedItems}>
                     <p>{el}</p>
@@ -265,13 +272,17 @@ export default function DogCreation() {
                 ))}
               </div>
             </div>
+            <hr />
+            <button className={styles.button} type="submit">
+                Create 
+              </button>
+              
+              <hr />
             <div className={styles.buttonSection}>
               <Link to="/home">
                 <button className={styles.buttonCancel}>Cancel And Back</button>
               </Link>
-              <button className={styles.button} type="submit">
-                Create 
-              </button>
+              
             </div>
           </form>
           <div></div>
