@@ -92,25 +92,39 @@ dogs.get("/dogs/:idRaza", async (req, res) => {
   }
 });
 
-dogs.delete("/dogs/:id/delete", async (req, res) => {
-  const id = req.params.id;
-  console.log(id);
-  const totalDogs = await getAllDogs();
-  if (id) {
-    let dogId = await totalDogs.filter(
-      (el) => el.createdInDB === true && el.id == id
-    );
-    console.log(`este es el dogId${id}`);
-    dogId.length
-      ? res.status(200).json(
-          await Dog.destroy({
-            where: { id: id },
-            truncate: { cascade: true },
-          })
-        )
-      : res.status(404).send("is not Deleted");
-  }
-});
+dogs.delete("/dogs/:id/delete", async (req, res) =>  {
+  try {
+  
+   const idN =req.params.id;
+   
+   const dogById = await Dog.findByPk(idN);
+   dogById.destroy()
+  
+   res.status(200).json(
+    `${idN + " Was deletedes suscessfully"}`
+   )
+} catch (error) {
+  res.status(404).send(error);
+}
+
+//   const id = req.params.id;
+//   console.log(id);
+//   const totalDogs = await getAllDogs();
+//   if (id) {
+//     let dogId = await totalDogs.filter(
+//       (el) => el.createdInDB === true && el.id == id
+//     );
+//     console.log(`este es el dogId${id}`);
+//     dogId.length
+//       ? res.status(200).json(
+//           await Dog.destroy({
+//             where: { id: id },
+//             truncate: { cascade: true },
+//           })
+//         )
+//       : res.status(404).send("is not Deleted");
+//   }
+    });
 
 module.exports = dogs;
 

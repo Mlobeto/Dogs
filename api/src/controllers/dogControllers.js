@@ -22,6 +22,7 @@ const getApiInfoDog = async () => {
     }); 
     return apiInfo;
 };
+console.log(getApiInfoDog)
 
 const getDBInfoDog = async () => {
     const dogsDB = await Dog.findAll({
