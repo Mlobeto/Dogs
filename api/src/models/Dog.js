@@ -14,7 +14,6 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
       
-      
     },
     height_min:{
       type: DataTypes.INTEGER,
